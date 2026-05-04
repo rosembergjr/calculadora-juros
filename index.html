@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Juros</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      width: 300px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    input:focus {
+      border-color: #4facfe;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #4facfe;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #3a8dde;
+    }
+
+    #resultado {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .erro {
+      color: red;
+    }
+
+    .sucesso {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Calculadora de Dívida</h2>
+
+    <input type="number" id="valorDivida" placeholder="Valor da dívida">
+    <input type="number" id="diasAtraso" placeholder="Dias em atraso">
+
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    function calcular() {
+      let valorDivida = Number(document.getElementById("valorDivida").value);
+      let diasAtraso = Number(document.getElementById("diasAtraso").value);
+      let resultado = document.getElementById("resultado");
+
+      if (valorDivida <= 0 || isNaN(valorDivida)) {
+        resultado.innerText = "Valor da dívida inválido";
+        resultado.className = "erro";
+      } else if (diasAtraso < 0 || isNaN(diasAtraso)) {
+        resultado.innerText = "Dias em atraso inválido";
+        resultado.className = "erro";
+      } else {
+        let juros = valorDivida * 0.01 * diasAtraso;
+        let total = valorDivida + juros;
+
+        resultado.innerText =
+          `Juros: R$ ${juros.toFixed(2)} | Total: R$ ${total.toFixed(2)}`;
+        resultado.className = "sucesso";
+      }
+    }
+  </script>
+
+</body>
+</html>
